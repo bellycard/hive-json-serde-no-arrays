@@ -276,35 +276,34 @@ public class JsonSerde implements SerDe {
 		    }
 
 		    if (tmpValue == null) {
-			LOG.warn("No JSON value was found for the JSON path associated with column '" +
-				 columnNames.get(c) + "' or the value was 'null'.");
-			value = null;
+                LOG.warn("No JSON value was found for the JSON path associated with column '" +
+                     columnNames.get(c) + "' or the value was 'null'.");
+                value = null;
 		    } else {
-			colValue = tmpValue.toString();
+                colValue = tmpValue.toString();
 
-			// Get type-safe JSON values
-			if (ti.getTypeName().equalsIgnoreCase(Constants.DOUBLE_TYPE_NAME)) {
-			    value = Double.valueOf(colValue);
-			} else if (ti.getTypeName().equalsIgnoreCase(Constants.BIGINT_TYPE_NAME)) {
-			    value = Long.valueOf(colValue);
-			} else if (ti.getTypeName().equalsIgnoreCase(Constants.INT_TYPE_NAME)) {
-			    value = Integer.valueOf(colValue);
-			} else if (ti.getTypeName().equalsIgnoreCase(Constants.TINYINT_TYPE_NAME)) {
-			    value = Byte.valueOf(colValue);
-			} else if (ti.getTypeName().equalsIgnoreCase(Constants.FLOAT_TYPE_NAME)) {
-			    value = Float.valueOf(colValue);
-			} else if (ti.getTypeName().equalsIgnoreCase(Constants.BOOLEAN_TYPE_NAME)) {
-			    value = Boolean.valueOf(colValue);
-			} else if (ti.getTypeName().equalsIgnoreCase(Constants.TIMESTAMP_TYPE_NAME)) {
-                value = Timestamp.valueOf(colValue);
-            } else {
-			    // Fall back, just get an object
-			    value = colValue;
-			
-		    }
-
-		    row.set(c, value);
-		}
+                // Get type-safe JSON values
+                if (ti.getTypeName().equalsIgnoreCase(Constants.DOUBLE_TYPE_NAME)) {
+                    value = Double.valueOf(colValue);
+                } else if (ti.getTypeName().equalsIgnoreCase(Constants.BIGINT_TYPE_NAME)) {
+                    value = Long.valueOf(colValue);
+                } else if (ti.getTypeName().equalsIgnoreCase(Constants.INT_TYPE_NAME)) {
+                    value = Integer.valueOf(colValue);
+                } else if (ti.getTypeName().equalsIgnoreCase(Constants.TINYINT_TYPE_NAME)) {
+                    value = Byte.valueOf(colValue);
+                } else if (ti.getTypeName().equalsIgnoreCase(Constants.FLOAT_TYPE_NAME)) {
+                    value = Float.valueOf(colValue);
+                } else if (ti.getTypeName().equalsIgnoreCase(Constants.BOOLEAN_TYPE_NAME)) {
+                    value = Boolean.valueOf(colValue);
+                } else if (ti.getTypeName().equalsIgnoreCase(Constants.TIMESTAMP_TYPE_NAME)) {
+                    value = Timestamp.valueOf(colValue);
+                } else {
+                    // Fall back, just get an object
+                    value = colValue;
+                
+                }
+            }
+            row.set(c, value);
         }
 
 		return row;
