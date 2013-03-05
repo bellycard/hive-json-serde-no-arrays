@@ -25,6 +25,7 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.Writable;
 import org.json.JSONException;
 import org.json.JSONObject;
+import java.sql.Timestamp;
 
 import java.text.ParseException;
 
@@ -294,14 +295,17 @@ public class JsonSerde implements SerDe {
 			    value = Float.valueOf(colValue);
 			} else if (ti.getTypeName().equalsIgnoreCase(Constants.BOOLEAN_TYPE_NAME)) {
 			    value = Boolean.valueOf(colValue);
-			} else {
+			} else if (ti.getTypeName().equalsIgnoreCase(Constants.TIMESTAMP_TYPE_NAME)) {
+                value = Timestamp.valueOf(colValue);
+            } else {
 			    // Fall back, just get an object
 			    value = colValue;
-			}
+			
 		    }
 
 		    row.set(c, value);
 		}
+        }
 
 		return row;
 	}
